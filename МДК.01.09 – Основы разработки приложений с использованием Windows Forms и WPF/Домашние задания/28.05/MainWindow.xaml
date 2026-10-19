@@ -1,0 +1,17 @@
+<Window x:Class="Homework.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Учёт ежедневных трат" Width="420" Height="650" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Segoe UI" FontSize="15">
+    <StackPanel Margin="25">
+        <TextBlock Text="Расходы за неделю" FontSize="24" Margin="0,0,0,18" />
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="80" /><ColumnDefinition /></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="40" /><RowDefinition Height="40" /><RowDefinition Height="40" /><RowDefinition Height="40" /><RowDefinition Height="40" /><RowDefinition Height="40" /><RowDefinition Height="40" /></Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Пн:" VerticalAlignment="Center" /><TextBox x:Name="Day0" Grid.Row="0" Grid.Column="1" Margin="0,4" />
+            <TextBlock Grid.Row="1" Text="Вт:" VerticalAlignment="Center" /><TextBox x:Name="Day1" Grid.Row="1" Grid.Column="1" Margin="0,4" />
+            <TextBlock Grid.Row="2" Text="Ср:" VerticalAlignment="Center" /><TextBox x:Name="Day2" Grid.Row="2" Grid.Column="1" Margin="0,4" />
+            <TextBlock Grid.Row="3" Text="Чт:" VerticalAlignment="Center" /><TextBox x:Name="Day3" Grid.Row="3" Grid.Column="1" Margin="0,4" />
+            <TextBlock Grid.Row="4" Text="Пт:" VerticalAlignment="Center" /><TextBox x:Name="Day4" Grid.Row="4" Grid.Column="1" Margin="0,4" />
+            <TextBlock Grid.Row="5" Text="Сб:" VerticalAlignment="Center" /><TextBox x:Name="Day5" Grid.Row="5" Grid.Column="1" Margin="0,4" />
+            <TextBlock Grid.Row="6" Text="Вс:" VerticalAlignment="Center" /><TextBox x:Name="Day6" Grid.Row="6" Grid.Column="1" Margin="0,4" />
+        </Grid>
+        <Button Content="Посчитать" Click="Calculate_Click" Height="35" Margin="0,12,0,0" />
+        <Button Content="Очистить всё" Click="Clear_Click" Height="32" Margin="0,8,0,12" />
+        <Border Background="Honeydew" Padding="12"><TextBlock x:Name="ResultBlock" Text="Сумма: 0&#10;Средний расход: 0&#10;Максимум: 0" /></Border>
+    </StackPanel>
+</Window>

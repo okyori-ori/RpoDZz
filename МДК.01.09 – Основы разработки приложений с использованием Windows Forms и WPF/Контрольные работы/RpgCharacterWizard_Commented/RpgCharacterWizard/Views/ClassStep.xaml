@@ -1,0 +1,24 @@
+<UserControl x:Class="RpgCharacterWizard.Views.ClassStep"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="Выберите класс" Style="{StaticResource SectionTitle}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- При выборе в списке обновляется SelectedClass в общей модели. -->
+            <ListBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass, Mode=TwoWay}"
+                     DisplayMemberPath="Name" ItemContainerStyle="{StaticResource ChoiceItem}"
+                     VerticalAlignment="Top" BorderThickness="0"/>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                <TextBlock Text="Предпросмотр" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                <!-- После выбора класса AvatarPath меняется, и WPF показывает новую картинку. -->
+                <Image Source="{Binding AvatarPath}" Width="156" Height="156"/>
+                <TextBlock Text="{Binding SelectedRace.Name}" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

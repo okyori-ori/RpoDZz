@@ -1,0 +1,29 @@
+<UserControl x:Class="RpgCharacterWizard.Views.StatsStep"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <!-- Каждый ползунок двигается по целым значениям с шагом в одно очко. -->
+        <Style TargetType="Slider">
+            <Setter Property="TickFrequency" Value="1"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="SmallChange" Value="1"/>
+            <Setter Property="LargeChange" Value="1"/>
+            <Setter Property="Margin" Value="0,3,0,12"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Распределите 10 очков" Style="{StaticResource SectionTitle}"/>
+        <TextBlock Text="{Binding RemainingPoints, StringFormat='Осталось очков: {0}'}"
+                   Margin="0,0,0,18" FontWeight="SemiBold" Foreground="#3F617D"/>
+        <TextBlock Text="{Binding Strength, StringFormat='Сила: {0}'}"/>
+        <!-- Value хранит текущее значение, а Maximum не даёт потратить больше доступных очков. -->
+        <Slider Value="{Binding Strength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Maximum="{Binding MaxStrength}" AutomationProperties.Name="Сила"/>
+        <TextBlock Text="{Binding Agility, StringFormat='Ловкость: {0}'}"/>
+        <Slider Value="{Binding Agility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Maximum="{Binding MaxAgility}" AutomationProperties.Name="Ловкость"/>
+        <TextBlock Text="{Binding Intelligence, StringFormat='Интеллект: {0}'}"/>
+        <Slider Value="{Binding Intelligence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Maximum="{Binding MaxIntelligence}" AutomationProperties.Name="Интеллект"/>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,81 @@
+<Window x:Class="RpgCharacterWizard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:RpgCharacterWizard.Views"
+        Title="Создание персонажа" Width="640" Height="500"
+        MinWidth="540" MinHeight="480" WindowStartupLocation="CenterScreen"
+        Background="#EEF1F5" FontFamily="Segoe UI" FontSize="15" Foreground="#202C3A">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </Window.Resources>
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Margin="0,0,0,16" LastChildFill="False">
+            <TextBlock DockPanel.Dock="Left" Text="Создание персонажа"
+                       FontSize="25" FontWeight="SemiBold"/>
+            <TextBlock DockPanel.Dock="Right" Text="{Binding StepLabel}"
+                       VerticalAlignment="Center" Foreground="#526578"/>
+        </DockPanel>
+        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="22">
+            <!-- ContentControl показывает один экран и передаёт ему общий WizardViewModel. -->
+            <ContentControl Content="{Binding}">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <!-- По умолчанию показываем выбор расы. -->
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <views:RaceStep/>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <!-- Когда меняется Step, подставляем экран нужного шага. -->
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Step}" Value="2">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <views:StatsStep/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Step}" Value="3">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <views:ClassStep/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Step}" Value="4">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <views:ResultView/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </Border>
+        <!-- Command связывает кнопку с действием, а Visibility показывает её на подходящем шаге. -->
+        <DockPanel Grid.Row="2" Margin="0,16,0,0" LastChildFill="False">
+            <Button DockPanel.Dock="Left" Content="Назад" Command="{Binding BackCommand}"/>
+            <Button DockPanel.Dock="Right" Content="Далее" IsDefault="True"
+                    Command="{Binding NextCommand}"
+                    Visibility="{Binding ShowNext, Converter={StaticResource VisibilityConverter}}"/>
+            <Button DockPanel.Dock="Right" Content="Создать" IsDefault="True"
+                    Command="{Binding CreateCommand}"
+                    Visibility="{Binding ShowCreate, Converter={StaticResource VisibilityConverter}}"/>
+        </DockPanel>
+    </Grid>
+</Window>

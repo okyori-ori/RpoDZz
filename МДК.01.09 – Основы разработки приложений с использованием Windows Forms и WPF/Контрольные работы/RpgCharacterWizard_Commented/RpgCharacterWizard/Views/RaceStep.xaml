@@ -1,0 +1,21 @@
+<UserControl x:Class="RpgCharacterWizard.Views.RaceStep"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="Выберите расу" Style="{StaticResource SectionTitle}"/>
+        <!-- ItemsSource берёт список рас. TwoWay сохраняет выбор в SelectedRace и восстанавливает его при возврате. -->
+        <ListBox ItemsSource="{Binding Races}" SelectedItem="{Binding SelectedRace, Mode=TwoWay}"
+                 ItemContainerStyle="{StaticResource ChoiceItem}" BorderThickness="0">
+            <!-- Каждый пункт списка показывает картинку и имя расы. -->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding IconPath}" Width="60" Height="60"/>
+                        <TextBlock Text="{Binding Name}" Margin="14,0,0,0"
+                                   VerticalAlignment="Center" FontSize="17"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</UserControl>
